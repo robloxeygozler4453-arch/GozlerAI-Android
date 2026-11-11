@@ -170,6 +170,8 @@ private fun GozlerAIApp() {
                     },
                     onDownload = { model ->
                         if (!busy) {
+                            selectedId = model.id
+                            prefs.edit().putString("selected_model", model.id).apply()
                             busy = true
                             downloadProgress = 0f
                             downloadLabel = "Bağlanıyor…"
@@ -193,6 +195,8 @@ private fun GozlerAIApp() {
                     },
                     onLoad = { model ->
                         if (!busy) {
+                            selectedId = model.id
+                            prefs.edit().putString("selected_model", model.id).apply()
                             busy = true
                             status = "${model.title} belleğe yükleniyor…"
                             scope.launch {
