@@ -38,10 +38,6 @@ android {
         targetCompatibility = JavaVersion.VERSION_17
     }
 
-    kotlin {
-        jvmToolchain(17)
-    }
-
     externalNativeBuild {
         cmake {
             path = file("src/main/cpp/CMakeLists.txt")
@@ -54,6 +50,10 @@ android {
             useLegacyPackaging = true
         }
     }
+}
+
+kotlin {
+    jvmToolchain(17)
 }
 
 dependencies {
