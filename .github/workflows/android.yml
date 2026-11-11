@@ -20,7 +20,7 @@ jobs:
           java-version: '17'
       - uses: android-actions/setup-android@v3
       - name: Install Android NDK and CMake
-        run: sdkmanager "ndk;27.2.12479018" "cmake;3.22.1"
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0" "ndk;27.2.12479018" "cmake;3.22.1"
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
