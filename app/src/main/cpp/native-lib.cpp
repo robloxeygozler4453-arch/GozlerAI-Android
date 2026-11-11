@@ -12,6 +12,7 @@
 static llama_model * g_model = nullptr;
 static llama_context * g_ctx = nullptr;
 static std::mutex g_mutex;
+static bool g_backend_initialized = false;
 
 static void release_model() {
     if (g_ctx) {
@@ -33,7 +34,10 @@ Java_com_turkeyproje_gozlerai_NativeBridge_nativeLoadModel(JNIEnv * env, jobject
     env->ReleaseStringUTFChars(path, raw);
 
     release_model();
-    llama_backend_init();
+    if (!g_backend_initialized) {
+        llama_backend_init();
+        g_backend_initialized = true;
+    }
 
     auto model_params = llama_model_default_params();
     model_params.n_gpu_layers = 0;
@@ -75,7 +79,7 @@ Java_com_turkeyproje_gozlerai_NativeBridge_nativeGenerate(JNIEnv * env, jobject,
     int32_t count = llama_tokenize(vocab, input.c_str(), (int32_t) input.size(), tokens.data(), needed, true, true);
     if (count < 0) return env->NewStringUTF("HATA: Tokenizer hatası.");
     tokens.resize((size_t) count);
-    if (tokens.size() > 1900) tokens.erase(tokens.begin(), tokens.end() - 1900);
+    if (tokens.size() > 1900) tokens.erase(tokens.begin(), tokens.end() - 1700);
     if (tokens.empty()) return env->NewStringUTF("");
 
     llama_memory_clear(llama_get_memory(g_ctx), true);
