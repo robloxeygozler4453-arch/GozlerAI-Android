@@ -5,6 +5,7 @@
 #include <vector>
 #include <mutex>
 #include <algorithm>
+#include <thread>
 
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, "GozlerAI", __VA_ARGS__)
 
