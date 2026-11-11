@@ -1,0 +1,1 @@
+# GozlerAI ProGuard rules
