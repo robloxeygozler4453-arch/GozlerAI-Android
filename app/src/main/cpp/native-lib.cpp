@@ -75,6 +75,7 @@ Java_com_turkeyproje_gozlerai_NativeBridge_nativeGenerate(JNIEnv * env, jobject,
     int32_t count = llama_tokenize(vocab, input.c_str(), (int32_t) input.size(), tokens.data(), needed, true, true);
     if (count < 0) return env->NewStringUTF("HATA: Tokenizer hatası.");
     tokens.resize((size_t) count);
+    if (tokens.size() > 1900) tokens.erase(tokens.begin(), tokens.end() - 1900);
     if (tokens.empty()) return env->NewStringUTF("");
 
     llama_memory_clear(llama_get_memory(g_ctx), true);
