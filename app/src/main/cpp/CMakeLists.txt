@@ -19,7 +19,6 @@ FetchContent_Declare(
     llama_cpp
     GIT_REPOSITORY https://github.com/ggml-org/llama.cpp.git
     GIT_TAG 956591f4570aa6636895d90439892fef7c075b17
-    GIT_SHALLOW TRUE
 )
 FetchContent_MakeAvailable(llama_cpp)
 
